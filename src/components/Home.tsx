@@ -24,7 +24,7 @@ export default function Home() {
     return (
         <Container>
             <div>
-                <Link href="page1"> New Request </Link>
+                <Link href="main"> New Request </Link>
             </div>
         </Container>
     )

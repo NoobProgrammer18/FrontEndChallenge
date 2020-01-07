@@ -1,15 +1,5 @@
 import React from 'react'
 import Styled from 'styled-components'
-import Stepper from './Stepper'
-
-//styles
-const Container = Styled.div`
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-`;
 
 const InputContainer = Styled.div`
     margin-top: 5px;
@@ -29,46 +19,30 @@ const Label = Styled.label`
     margin: 1em 0.5em;
 `
 
-const ButtonContainer = Styled.div`
-    margin-top: 80px;
-    text-align: right;
-`;
-
-const Link = Styled.a`
-    color: white;
-    text-decoration:none;
-    font-size: 1.5em;
-    margin: 1em;
-    padding: 0.25em 1em;
-    background-color: #3742fa;
-`;
 
 export default function Page2(){
+
     return (
-        <Container>
-            <div>
-                <Stepper/>
-                <InputContainer>
-                    <Label>Number of parts:</Label>
-                    <Input type="text" />
-                </InputContainer>
-                <InputContainer>
-                    <Label>Number of parts:</Label>
-                    <Input type="text" />
-                </InputContainer>
-                <InputContainer>
-                    <Label>Number of parts:</Label>
-                    <Input type="text" />
-                </InputContainer>
-                <InputContainer>
-                    <Label>Number of parts:</Label>
-                    <Input type="text" />
-                </InputContainer>
-                <ButtonContainer>
-                    <Link href="page1"> Previous </Link>
-                    <Link href="page1"> Next </Link>
-                </ButtonContainer>
-            </div>
-        </Container>
+        <form>
+            <InputContainer>
+                <Label>Number of parts:
+                    ``
+                </Label>
+                <Input type="text" />
+            </InputContainer>
+            <InputContainer>
+                <Label>Number of parts:</Label>
+                <Input type="text" />
+            </InputContainer>
+            <InputContainer>
+                <Label>Number of parts:</Label>
+                <Input type="text" />
+            </InputContainer>
+            <InputContainer>
+                <Label>Number of parts:</Label>
+                <Input type="text" />
+            </InputContainer>
+        </form>
     )
 }
+
