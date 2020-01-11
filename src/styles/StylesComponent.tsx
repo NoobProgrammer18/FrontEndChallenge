@@ -21,10 +21,16 @@ export const Button = Styled.button`
     padding: 0.25em 1em;
     background-color: #3742fa;
 
-    &.prev-btn{
-        background-color : #2f3542;
-    }
+`;
 
+export const ButtonPrev = Styled.button`
+    color: white;
+    text-decoration:none;
+    font-size: 1.5em;
+    margin: 1em;
+    padding: 0.25em 1em;
+    background-color: #2f3542;
+    
 `;
 
 export const Link = Styled.a`

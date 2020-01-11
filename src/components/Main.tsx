@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import {Container, ButtonContainer, Button} from '../styles/StylesComponent'
+import {Container, ButtonContainer, Button, ButtonPrev} from '../styles/StylesComponent'
 import {Home} from '../redirects/Redirects'
 import {StepperProvider} from '../context/StepperContext'
 import {PartsProvider} from '../context/PartsContext'
@@ -19,7 +19,7 @@ const Main = () =>
 
 
     const buttons = <ButtonContainer>
-                        <Button onClick={(event) => {step > 0 ? setStep(step - 1) : Home(event) ; }}> Previous </Button>
+                        <ButtonPrev onClick={(event) => {step > 0 ? setStep(step - 1) : Home(event) ; }}> Previous </ButtonPrev>
                         <Button disabled = { NextBtnDisable(step, num_parts, parts_inputs) }  onClick={(event) => setStep(step + 1) }> Next </Button>
                     </ButtonContainer>;
 
