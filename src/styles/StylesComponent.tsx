@@ -74,3 +74,14 @@ export const HomeLink = Styled.a`
     padding: 0.25em 1em;
     background-color: #3742fa;
 `;
+
+
+export const StepperContainer = Styled.div`
+    width: 500px;
+    margin-bottom: 70px;
+`;
+
+export const HexColor = {
+    primary : "#3742fa",
+    default : "#70a1ff"
+}
