@@ -3,36 +3,37 @@ import { render, fireEvent } from "@testing-library/react";
 import Main from '../components/Main'
 
 
-describe("only number accepted", () => {
-
+const InputChange = (expected : string, value : any) => 
+{
     const { getByLabelText } = render(<Main/>);
     const inputNode =  getByLabelText('parts') as HTMLInputElement;
+    fireEvent.change(inputNode, { target: { value: value } });
+    expect(inputNode.value).toBe(expected); 
+}
+
+describe("only number accepted", () => {
 
     test("check string", async () => {
-
-        fireEvent.change(inputNode, { target: { value: "Some Text" } });
-        expect(inputNode.value).toBe(""); 
+       
+        InputChange("", "Some Text");
 
     });
 
     test("check number string", async () => {
         
-        fireEvent.change(inputNode, { target: { value: "5" } });
-        expect(inputNode.value).toBe("5"); 
+        InputChange("5", "5");
 
     });
 
     test("check number", async () => {
-        
-        fireEvent.change(inputNode, { target: { value: 5 } });
-        expect(inputNode.value).toBe("5"); 
+
+        InputChange("5", 5);
 
     });
 
     test("check special character", async () => {
-        
-        fireEvent.change(inputNode, { target: { value: "_/[]{}.," } });
-        expect(inputNode.value).toBe("5"); 
+
+        InputChange("", "_/+[]{}");
 
     });
 
