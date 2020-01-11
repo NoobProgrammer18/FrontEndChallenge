@@ -1,75 +1,75 @@
 import React,{useState} from 'react'
-import Stepper from './Stepper'
+import {Container, ButtonContainer, Button} from '../styles/StylesComponent'
+import {Home} from '../redirects/Redirects'
 import {StepperProvider} from '../context/StepperContext'
-import Styled from 'styled-components'
+import {PartsProvider} from '../context/PartsContext'
+import Stepper from './Stepper'
 import Page1 from './Page1'
 import Page2 from './Page2'
 import Page3 from './Page3'
 
 
-const Container = Styled.div`
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-`;
-
-const ButtonContainer = Styled.div`
-    margin-top: 80px;
-    text-align: right;
-`;
-
-const Buttons = Styled.button`
-    color: white;
-    text-decoration:none;
-    font-size: 1.5em;
-    margin: 1em;
-    padding: 0.25em 1em;
-    background-color: #3742fa;
-
-    &.prev-btn{
-        background-color : #2f3542;
-    }
-
-`;
-
-
-export default function Main(){
+const Main = () => 
+{
 
     const [step,setStep] = useState(0);
+    const [num_parts,setNumParts] = useState("");
+    const [parts_inputs,setPartsInput] = useState({});
+
+
 
     const buttons = <ButtonContainer>
-                        <Buttons onClick={(event) => {step < 0 ? setStep(step - 1) : Home(event) }}> Previous </Buttons>
-                        <Buttons  onClick={(event) => setStep(step + 1)}> Next </Buttons>
+                        <Button onClick={(event) => {step > 0 ? setStep(step - 1) : Home(event) ; }}> Previous </Button>
+                        <Button disabled = { NextBtnDisable(step, num_parts, parts_inputs) }  onClick={(event) => setStep(step + 1) }> Next </Button>
                     </ButtonContainer>;
+
     const pages = [
         <div>
-            <Page1/>
+            <Page1 setNumParts={setNumParts} setPartsInput={setPartsInput} step={step}/>
             {buttons}
         </div>,
         <div>
-            <Page2/>
+            <Page2 setPartsInput={setPartsInput} parts_inputs={parts_inputs} step={step}/>
             {buttons}
         </div>,
         <Page3/>
     ]
 
     return (
-        <Container>
-            <div>
-                <StepperProvider value={step}>
-                    <Stepper/>
-                </StepperProvider>
-                {pages[step]}
-                
-            </div>
-        </Container>
+        <PartsProvider value={num_parts}>
+            <Container>
+                <div>
+                    <StepperProvider value={step}>
+                        <Stepper/>
+                    </StepperProvider>
+                    {pages[step]}
+                </div>
+            </Container>
+        </PartsProvider>
     )
 
 }
 
-function Home(e : any){
-    e.preventDefault();
-    window.location.href = '/';
+const NextBtnDisable = (step : number , parts : string, parts_input : object) =>
+{
+  
+    const sum_parts_value = Object.values(parts_input).reduce((a, b) => parseInt(a) + parseInt(b), 0);
+
+    const parts_length = Object.keys(parts_input).length;
+    
+    let ret = true;
+
+    if(step === 0 && parseInt(parts))
+    {
+        ret = false;
+    }
+    else if( step === 1 && parts_length === parseInt(parts) && sum_parts_value  === 100)
+    {
+        ret = false;
+    }
+
+    return ret;
+
 }
+
+export default Main;

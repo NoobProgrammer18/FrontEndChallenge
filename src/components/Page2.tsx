@@ -1,48 +1,36 @@
-import React from 'react'
-import Styled from 'styled-components'
-
-const InputContainer = Styled.div`
-    margin-top: 5px;
-`;
-
-const Input = Styled.input`
-    padding: 0.2em;
-    margin: 0.5em;
-    height: 25px;
-    width:250px;
-    border: solid black 2px;
-`;
-
-const Label = Styled.label`
-    font-size: 25px;
-    padding: 0.5em;
-    margin: 1em 0.5em;
-`
+import React,{useContext} from 'react'
+import {handleInputChange} from '../utilities/Utilities'
+import {InputContainer, Label, Input} from '../styles/StylesComponent'
+import PartsContext from '../context/PartsContext'
 
 
-export default function Page2(){
+const Page2 = (params: any) =>
+{
+    const parts = useContext(PartsContext)
 
     return (
         <form>
-            <InputContainer>
-                <Label>Number of parts:
-                    ``
-                </Label>
-                <Input type="text" />
-            </InputContainer>
-            <InputContainer>
-                <Label>Number of parts:</Label>
-                <Input type="text" />
-            </InputContainer>
-            <InputContainer>
-                <Label>Number of parts:</Label>
-                <Input type="text" />
-            </InputContainer>
-            <InputContainer>
-                <Label>Number of parts:</Label>
-                <Input type="text" />
-            </InputContainer>
+            {RenderPartsInput(parseInt(parts), params)}
         </form>
     )
 }
 
+const RenderPartsInput = (parts: number, params: any) => 
+{
+
+    let inputs = [] as any;
+    for(let input = 1; input <= parts; input ++)
+    {
+        let value = params.parts_inputs['part'+input];
+        value = (value) ? value : "";
+
+        inputs.push(<InputContainer key={'part'+input}>
+                        <Label>Part {input} %</Label>
+                        <Input type="text" name={'part' + input} onChange={(event) => handleInputChange(params, event)} value={ value }/>
+                    </InputContainer>);
+    }
+
+    return inputs;
+}
+
+export default Page2;
